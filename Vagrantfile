@@ -14,6 +14,7 @@ Vagrant.configure(2) do |config|
     aws.instance_type = "t2.small"
     aws.region = "eu-central-1"
     aws.security_groups = ["ssh", "GoCD"]
+    aws.elastic_ip = "52.58.42.160"
 
     aws.ami = "ami-7ce3f910"
 
