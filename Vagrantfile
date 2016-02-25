@@ -29,5 +29,5 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :shell, :inline => "sudo cp /vagrant/cruise-config.xml /etc/go/"
-
+  config.vm.provision :shell, :inline => "sudo cp /vagrant/passwd /etc/go/"
 end

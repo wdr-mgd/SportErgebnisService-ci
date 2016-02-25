@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="78">
-  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="6b8fcb12-4940-474b-83e9-55bdc24ad16a" />
+  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="6b8fcb12-4940-474b-83e9-55bdc24ad16a">
+    <security>
+      <passwordFile path="/etc/go/passwd" />
+    </security>
+  </server>
   <pipelines group="WDR">
     <pipeline name="Build">
       <materials>
@@ -66,5 +70,3 @@
     <agent hostname="ip-172-31-19-47" ipaddress="172.31.19.47" uuid="a3553b80-564e-4c7c-a378-450714916fe5" />
   </agents>
 </cruise>
-
-
