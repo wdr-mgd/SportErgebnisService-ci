@@ -28,4 +28,4 @@ This will start a EC2 Container Services VM with two Docker containers:
 1. gocd-server
 2. gocd-agent1
 
-Open http://52.58.42.160:8153/ in your browser to access the Go CD server.
+Open http://52.28.171.249:8153/ in your browser to access the Go CD server.
