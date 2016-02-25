@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="78">
+  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="6b8fcb12-4940-474b-83e9-55bdc24ad16a" />
+  <pipelines group="WDR">
+    <pipeline name="Build">
+      <materials>
+        <git url="https://DennisTraub:___github.com/WDRMediaGroupProject/SportErgebnisService.git" />
+      </materials>
+      <stage name="compile">
+        <jobs>
+          <job name="compile">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>mvn clean compile</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="test">
+        <jobs>
+          <job name="test">
+            <tasks>
+              <exec command="mvn">
+                <arg>test</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="package">
+        <jobs>
+          <job name="package">
+            <tasks>
+              <exec command="mvn">
+                <arg>package</arg>
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="RestApi/target/sportergebnis-api-0.1.0.war" dest="pkg" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="Deploy_Dev">
+      <materials>
+        <pipeline pipelineName="Build" stageName="package" />
+      </materials>
+      <stage name="fetch">
+        <jobs>
+          <job name="fetch">
+            <tasks>
+              <fetchartifact pipeline="Build" stage="package" job="package" srcdir="pkg">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="ls" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <agents>
+    <agent hostname="ip-172-31-19-47" ipaddress="172.31.19.47" uuid="a3553b80-564e-4c7c-a378-450714916fe5" />
+  </agents>
+</cruise>
+
+
