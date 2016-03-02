@@ -8,7 +8,7 @@
   <pipelines group="WDR">
     <pipeline name="Build">
       <materials>
-        <git url="https://DennisTraub:___github.com/WDRMediaGroupProject/SportErgebnisService.git" />
+        <git url="https://DennisTraub:_____@github.com/WDRMediaGroupProject/SportErgebnisService.git" />
       </materials>
       <stage name="compile">
         <jobs>
@@ -52,21 +52,49 @@
       <materials>
         <pipeline pipelineName="Build" stageName="package" />
       </materials>
-      <stage name="fetch">
+      <stage name="fetchAndDeploy">
         <jobs>
-          <job name="fetch">
+          <job name="fetchAndCopy">
             <tasks>
               <fetchartifact pipeline="Build" stage="package" job="package" srcdir="pkg">
                 <runif status="passed" />
               </fetchartifact>
-              <exec command="ls" />
+              <exec command="scp">
+                <arg>pkg/sportergebnis-api-0.1.0.war</arg>
+                <arg>tomcat@52.58.51.89:/opt/tomcat/apache-tomcat-8.0.32/webapps/SportErgebnisWS.war</arg>
+                <runif status="passed" />
+              </exec>
             </tasks>
+            <artifacts>
+              <artifact src="*" />
+            </artifacts>
           </job>
         </jobs>
       </stage>
     </pipeline>
   </pipelines>
+  <environments>
+    <environment name="Development">
+      <agents>
+        <physical uuid="a3553b80-564e-4c7c-a378-450714916fe5" />
+      </agents>
+      <pipelines>
+        <pipeline name="Build" />
+        <pipeline name="Deploy_Dev" />
+      </pipelines>
+    </environment>
+    <environment name="Test">
+      <agents>
+        <physical uuid="a3553b80-564e-4c7c-a378-450714916fe5" />
+      </agents>
+    </environment>
+    <environment name="Showcase">
+      <agents>
+        <physical uuid="a3553b80-564e-4c7c-a378-450714916fe5" />
+      </agents>
+    </environment>
+  </environments>
   <agents>
-    <agent hostname="ip-172-31-19-47" ipaddress="172.31.19.47" uuid="a3553b80-564e-4c7c-a378-450714916fe5" />
+    <agent hostname="ip-172-31-19-47" ipaddress="172.31.24.99" uuid="a3553b80-564e-4c7c-a378-450714916fe5" />
   </agents>
 </cruise>
