@@ -8,32 +8,9 @@
   <pipelines group="WDR">
     <pipeline name="Build">
       <materials>
-        <git url="https://DennisTraub:_____@github.com/WDRMediaGroupProject/SportErgebnisService.git" />
+        <git url="git@github.com:WDRMediaGroupProject/SportErgebnisService.git" materialName="SportErgebnisService.git" />
       </materials>
-      <stage name="compile">
-        <jobs>
-          <job name="compile">
-            <tasks>
-              <exec command="/bin/bash">
-                <arg>-c</arg>
-                <arg>mvn clean compile</arg>
-              </exec>
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-      <stage name="test">
-        <jobs>
-          <job name="test">
-            <tasks>
-              <exec command="mvn">
-                <arg>test</arg>
-              </exec>
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-      <stage name="package">
+      <stage name="package" cleanWorkingDir="true">
         <jobs>
           <job name="package">
             <tasks>
@@ -68,6 +45,22 @@
             <artifacts>
               <artifact src="*" />
             </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="EndpointTests">
+      <materials>
+        <git url="git@github.com:WDRMediaGroupProject/SportErgebnisService.git" />
+      </materials>
+      <stage name="execute">
+        <jobs>
+          <job name="integration-test">
+            <tasks>
+              <exec command="mvn">
+                <arg>integration-test</arg>
+              </exec>
+            </tasks>
           </job>
         </jobs>
       </stage>
