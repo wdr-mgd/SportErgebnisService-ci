@@ -28,6 +28,7 @@
     <pipeline name="Deploy_Dev">
       <materials>
         <pipeline pipelineName="Build" stageName="package" />
+        <git url="git@github.com:WDRMediaGroupProject/SportErgebnisService.git" materialName="SportErgebnisService.git" />
       </materials>
       <stage name="fetchAndDeploy">
         <jobs>
@@ -48,16 +49,22 @@
           </job>
         </jobs>
       </stage>
-    </pipeline>
-    <pipeline name="EndpointTests">
-      <materials>
-        <git url="git@github.com:WDRMediaGroupProject/SportErgebnisService.git" />
-      </materials>
-      <stage name="execute">
+      <stage name="endpointTests">
+        <environmentvariables>
+          <variable name="WS_PORT">
+            <value>8080</value>
+          </variable>
+          <variable name="WS_HOST">
+            <value>52.58.51.89</value>
+          </variable>
+          <variable name=" WS_NAME">
+            <value>SportErgebnisWS</value>
+          </variable>
+        </environmentvariables>
         <jobs>
-          <job name="integration-test">
+          <job name="integrationTest">
             <tasks>
-              <exec command="mvn">
+              <exec command="mvn" workingdir="EndpointTests">
                 <arg>integration-test</arg>
               </exec>
             </tasks>
