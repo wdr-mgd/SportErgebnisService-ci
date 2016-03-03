@@ -47,6 +47,13 @@
               <artifact src="*" />
             </artifacts>
           </job>
+          <job name="waitForStartup">
+            <tasks>
+              <exec command="sleep">
+                <arg>30</arg>
+              </exec>
+            </tasks>
+          </job>
         </jobs>
       </stage>
       <stage name="endpointTests">
@@ -57,7 +64,7 @@
           <variable name="WS_HOST">
             <value>52.58.51.89</value>
           </variable>
-          <variable name=" WS_NAME">
+          <variable name="WS_NAME">
             <value>SportErgebnisWS</value>
           </variable>
         </environmentvariables>
