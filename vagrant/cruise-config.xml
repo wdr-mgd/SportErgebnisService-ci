@@ -14,8 +14,10 @@
         <jobs>
           <job name="package">
             <tasks>
-              <exec command="mvn">
-                <arg>package</arg>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>mvn package -DskipITs</arg>
+                <runif status="passed" />
               </exec>
             </tasks>
             <artifacts>
