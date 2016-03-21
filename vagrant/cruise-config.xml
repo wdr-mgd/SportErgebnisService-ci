@@ -44,6 +44,11 @@
                 <arg>tomcat@52.58.51.89:/opt/tomcat/apache-tomcat-8.0.32/webapps/SportErgebnisWS.war</arg>
                 <runif status="passed" />
               </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ssh -tt ec2-user@52.58.51.89 'stty raw -echo; sudo systemctl restart tomcat' &lt; &lt;(cat)</arg>
+                <runif status="passed" />
+              </exec>
             </tasks>
             <artifacts>
               <artifact src="*" />
