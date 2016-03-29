@@ -19,6 +19,7 @@ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.
 export AWS_ACCESS_ID=[Username in keys.kdb]
 export AWS_SECRET_ACCESS_KEY=[Password in keys.kdb]
 ```
+To ssh onto the AWS Go-Box run: ssh -i [path to aws docker box pem file] ubuntu@ec2-52-28-171-249.eu-central-1.compute.amazonaws.com
 
 # Starting the VM on AWS (make sure it's not running yet)
 ```
@@ -29,3 +30,4 @@ This will start a EC2 Container Services VM with two Docker containers:
 2. gocd-agent1
 
 Open http://52.28.171.249:8153/ in your browser to access the Go CD server.
+
