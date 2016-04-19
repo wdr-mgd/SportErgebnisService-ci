@@ -16,7 +16,7 @@
             <tasks>
               <exec command="/bin/bash">
                 <arg>-c</arg>
-                <arg>mvn package -DskipITs</arg>
+                <arg>mvn package war:manifest -DskipITs</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
