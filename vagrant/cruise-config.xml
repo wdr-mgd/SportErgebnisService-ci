@@ -21,7 +21,7 @@
               </exec>
             </tasks>
             <artifacts>
-              <artifact src="RestApi/target/sportergebnis-api-0.1.0.war" dest="pkg" />
+              <artifact src="RestApi/target/sportergebnis-api-3.0.0-SNAPSHOT.war" dest="pkg" />
             </artifacts>
           </job>
         </jobs>
@@ -40,7 +40,7 @@
                 <runif status="passed" />
               </fetchartifact>
               <exec command="scp">
-                <arg>pkg/sportergebnis-api-0.1.0.war</arg>
+                <arg>pkg/sportergebnis-api-3.0.0-SNAPSHOT.war</arg>
                 <arg>tomcat@52.58.51.89:/opt/tomcat/apache-tomcat-8.0.32/webapps/SportErgebnisWS.war</arg>
                 <runif status="passed" />
               </exec>
